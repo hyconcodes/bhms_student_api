@@ -20,9 +20,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/students', [StudentController::class, 'index']);
-Route::get('/students/{matric}', [StudentController::class, 'getByMatric']);
-Route::get('/students/{email}', [StudentController::class, 'getByEmail']);
-Route::get('/students/{department}', [StudentController::class, 'getByDepartment']);
-Route::get('/students/{level}', [StudentController::class, 'getByLevel']);
-Route::get('/students/{year_of_study}', [StudentController::class, 'getByYearOfStudy']);
+Route::get('/students/matric/{matric}', [StudentController::class, 'getByMatric']);
+Route::get('/students/email/{email}', [StudentController::class, 'getByEmail']);
+Route::get('/students/department/{department}', [StudentController::class, 'getByDepartment']);
+Route::get('/students/level/{level}', [StudentController::class, 'getByLevel']);
+Route::get('/students/year-of-study/{year_of_study}', [StudentController::class, 'getByYearOfStudy']);
 Route::post('/students', [StudentController::class, 'store']);
