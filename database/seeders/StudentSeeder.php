@@ -84,19 +84,23 @@ class StudentSeeder extends Seeder
         // Insert exactly 5000 students
         $students = [];
         for ($i = 0; $i < 5000; $i++) {
+            $numericPart = str_pad(mt_rand(10000000, 99999999), 8, '0', STR_PAD_LEFT);
+            $alphabetPart = chr(mt_rand(65, 90)) . chr(mt_rand(65, 90)); // Random uppercase letters
+            
             $students[] = [
-                'name' => $faker->name($faker->randomElement(['male', 'female'])),
-                'email' => $faker->unique()->safeEmail,
-                'matric' => $startMatric + $i, // Sequential matric numbers starting from 2000
-                'date_of_birth' => $faker->date('Y-m-d', '2005-12-31'),
-                'gender' => $faker->randomElement(['Male', 'Female']),
-                'phone' => $faker->phoneNumber,
-                'address' => $faker->address,
-                'department' => $faker->randomElement($departments),
-                'level' => $faker->randomElement($levels),
-                'year_of_study' => $faker->randomElement($years),
-                'created_at' => now(),
-                'updated_at' => now(),
+            'name' => $faker->name($faker->randomElement(['male', 'female'])),
+            'email' => $faker->unique()->safeEmail,
+            'matric' => $startMatric + $i, // Sequential matric numbers starting from 2000
+            'reg_no' => $numericPart . $alphabetPart,
+            'date_of_birth' => $faker->date('Y-m-d', '2005-12-31'),
+            'gender' => $faker->randomElement(['Male', 'Female']),
+            'phone' => $faker->phoneNumber,
+            'address' => $faker->address,
+            'department' => $faker->randomElement($departments),
+            'level' => $faker->randomElement($levels),
+            'year_of_study' => $faker->randomElement($years),
+            'created_at' => now(),
+            'updated_at' => now(),
             ];
         }
 
