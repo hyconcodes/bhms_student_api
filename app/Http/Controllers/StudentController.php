@@ -29,6 +29,20 @@ class StudentController extends Controller
             'data' => $student
         ], 200);
     }
+    public function getByJambNo($jamb_no)
+    {
+        $student = \App\Models\Student::where('reg_no', $jamb_no)->first();
+        if (!$student) {
+            return response()->json([
+                'message' => 'Student not found',
+                'data' => null
+            ], 404);
+        }
+        return response()->json([
+            'message' => 'Student retrieved successfully',
+            'data' => $student
+        ], 200);
+    }
 
     public function getByEmail($email)
     {
@@ -87,5 +101,24 @@ class StudentController extends Controller
             'message' => 'Student created successfully',
             'data' => $student
         ], 201);
+    }
+
+    public function updateMatricByJambNo(Request $request, $jamb_no)
+    {
+        $student = \App\Models\Student::where('reg_no', $jamb_no)->first();
+        if (!$student) {
+            return response()->json([
+                'message' => 'Student not found',
+                'data' => null
+            ], 404);
+        }
+        $validatedData = $request->validate([
+            'matric' => 'required|numeric|unique:students,matric,',
+        ]);
+        $student->update(['matric' => $validatedData['matric']]);
+        return response()->json([
+            'message' => 'Student matric number updated successfully',
+            'data' => $student
+        ], 200);
     }
 }
